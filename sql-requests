@@ -3,7 +3,8 @@
     -кол-во сотрудников, которые выполняли хоть какие-нибудь действия за указанный период;
 SQL REQUEST:
 
-SELECT count(*) || ' ' || count(DISTINCT employee_id) FROM actions
+SELECT count(*) || ' actions were made by ' || count(DISTINCT employee_id) || ' employees' 
+FROM actions
 WHERE dt BETWEEN '20200201' and '20200229'
 
 2. Составить запрос, который выводит логины сотрудников, которые не выполняли никаких действий в феврале 2020.
