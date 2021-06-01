@@ -9,8 +9,18 @@ WHERE dt BETWEEN '20200201' and '20200229'
 2. Составить запрос, который выводит логины сотрудников, которые не выполняли никаких действий в феврале 2020.
 SQL REQUEST:
 
-SELECT DISTINCT emp.login
+SELECT DISTINCT emp.login || ' have not made any actions in feb 2020'
 FROM actions AS act
 JOIN employee AS emp ON (act.employee_id = emp.id)
 WHERE emp.id NOT IN (SELECT DISTINCT employee_id FROM actions WHERE dt BETWEEN '20200201' AND '20200228')
 
+3.Составить запрос, который выводит 5 сотрудников с наибольшим количеством действий за февраль 2020, 
+а также кол-во их действий, отсортированных в порядке убывания.
+SQL REQUEST:
+
+SELECT emp.login ||' made '|| count(act.action) || ' actions in feb 2020'
+FROM actions AS act
+JOIN employee AS emp ON (act.employee_id = emp.id)
+WHERE act.dt BETWEEN '20200201' AND '20200229'
+GROUP BY emp.id
+ORDER BY count(act.action) DESC LIMIT 5
